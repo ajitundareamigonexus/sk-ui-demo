@@ -8,14 +8,16 @@ import { FaWhatsapp } from 'react-icons/fa6';
 import { getCurrentUser, logout, type User } from '@/lib/authStore';
 
 const navLinks = [
-  { href: '/', label: 'HOME' },
-  { href: '/#about', label: 'ABOUT' },
-  { href: '/#services', label: 'SERVICES' },
-  { href: '/#packages', label: 'PACKAGES' },
-  { href: '/#gallery', label: 'BOOK CAB' },
-  { href: '/my-bookings', label: 'MY BOOKIGS' },
-  { href: '/admin', label: 'ADMIN PANEL' },
-  { href: '/#contact', label: 'CONTACT' },
+  { href: '/', label: 'DEMO 1' },
+  { href: '/demo2', label: 'DEMO 2' },
+  { href: '/demo3', label: 'DEMO 3' },
+  // { href: '/#about', label: 'ABOUT' },
+  // { href: '/#services', label: 'SERVICES' },
+  // { href: '/#packages', label: 'PACKAGES' },
+  // { href: '/#gallery', label: 'BOOK CAB' },
+  // { href: '/my-bookings', label: 'MY BOOKIGS' },
+  // { href: '/admin', label: 'ADMIN PANEL' },
+  // { href: '/#contact', label: 'CONTACT' },
 ];
 
 export default function Navbar() {
@@ -89,8 +91,8 @@ export default function Navbar() {
     return true;
   });
 
-  const isHome = pathname === '/';
-  const isSolid = scrolled || !isHome;
+  const isTransparentPage = pathname === '/' || pathname === '/demo2' || pathname === '/demo3';
+  const isSolid = scrolled || !isTransparentPage;
 
   return (
     <header
