@@ -6,13 +6,15 @@ import { useRouter, usePathname } from 'next/navigation';
 import { Moon, Sun, Menu, X, LogOut, User as UserIcon, Compass, Phone, Mail, Headphones, Tag, ShieldCheck } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { getCurrentUser, logout, type User } from '@/lib/authStore';
+import NavbarDemo2 from './NavbarDemo2';
 
 const navLinks = [
+  // { href: '/#about', label: 'ABOUT' },
+  // { href: '/#services', label: 'SERVICES' },
+  { href: '/#packages', label: 'PACKAGES' },
   { href: '/', label: 'DEMO 1' },
   { href: '/demo2', label: 'DEMO 2' },
   { href: '/demo3', label: 'DEMO 3' },
-  // { href: '/#about', label: 'ABOUT' },
-  // { href: '/#services', label: 'SERVICES' },
   // { href: '/#packages', label: 'PACKAGES' },
   // { href: '/#gallery', label: 'BOOK CAB' },
   // { href: '/my-bookings', label: 'MY BOOKIGS' },
@@ -93,6 +95,10 @@ export default function Navbar() {
 
   const isTransparentPage = pathname === '/' || pathname === '/demo2' || pathname === '/demo3';
   const isSolid = scrolled || !isTransparentPage;
+
+  if (pathname === '/demo2') {
+    return <NavbarDemo2 />;
+  }
 
   return (
     <header
@@ -190,12 +196,12 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
 
-          <Link
+          {/* <Link
             href="/"
             className="hidden md:inline-flex items-center justify-center rounded-full bg-teal-400 hover:bg-teal-300 text-slate-950 px-5 py-2 text-sm font-bold transition-colors duration-200 cursor-pointer"
           >
             Book Now
-          </Link>
+          </Link> */}
 
           {user ? (
             <div ref={dropdownRef} className="hidden md:block relative">

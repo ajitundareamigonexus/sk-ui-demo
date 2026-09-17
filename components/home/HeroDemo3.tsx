@@ -49,14 +49,19 @@ const popularDestinations = [
     image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=800',
   },
   {
-    name: 'Ooty',
-    tagline: 'Queen of Nilgiris',
-    image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?q=80&w=800',
+    name: 'Dubai',
+    tagline: 'City of Gold',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800',
   },
   {
-    name: 'Lonavala',
-    tagline: 'Misty Waterfalls & Forts',
-    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800',
+    name: 'Maldives',
+    tagline: 'Tropical Paradise',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800',
+  },
+  {
+    name: 'Bali',
+    tagline: 'Island of Gods',
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800',
   },
   {
     name: 'Rishikesh',
@@ -163,11 +168,13 @@ export default function HeroDemo3() {
 
   return (
     <div id="home-demo2">
-      <section className="relative overflow-hidden min-h-[850px] lg:min-h-[700px]">
+      <section className="relative overflow-hidden min-h-[700px] lg:min-h-[600px]">
         {/* Adaptive background — works in both light and dark mode */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
-        <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-x-0 top-0 h-[75%] z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
+        <div className="absolute inset-x-0 top-0 h-[75%] z-0 opacity-20 dark:opacity-10" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
+        {/* White background for the lower section */}
+        <div className="absolute inset-x-0 bottom-0 h-[25%] z-[1] bg-background" />
+        <div className="absolute inset-x-0 top-0 h-[75%] z-0">
           {/* Images commented out — background gradient active */}
           {heroImages.map((image, index) => (
             <div
@@ -228,18 +235,38 @@ export default function HeroDemo3() {
                     {[
                       { name: 'Goa', sub: 'Sun • Sand • Fun', img: '/hero/hero-6.png' },
                       { name: 'Kashmir', sub: 'Heaven on Earth', img: '/hero/hero-3.png' },
-                      { name: 'Rajasthan', sub: 'Royal Heritage', img: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=800' },
-                      { name: 'Kerala', sub: "God's Own Country", img: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800' },
-                    ].map((card) => (
-                      <div key={card.name} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
-                        <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
-                          <Image src={card.img} alt={card.name} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
+                      { name: 'Dubai', sub: 'City of Gold', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800' },
+                      { isMore: true },
+                    ].map((card, idx) => (
+                      card.isMore ? (
+                        <div
+                          key="more"
+                          onClick={() => {
+                            const section = document.getElementById('popular-destinations');
+                            if (section) section.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                          className="relative w-20 sm:w-24 lg:w-[105px] rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-all cursor-pointer shrink-0 snap-center h-[112px] sm:h-[128px] lg:h-[135px] group"
+                        >
+                          <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800" alt="More Destinations" fill className="object-cover blur-[2px] group-hover:blur-sm transition-all duration-300 scale-110" sizes="(max-width: 768px) 80px, 112px" />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-teal-500 flex items-center justify-center text-white mb-1.5 shadow-sm">
+                              <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 ml-0.5" />
+                            </div>
+                            <span className="text-[10px] lg:text-[11px] font-extrabold text-white text-center drop-shadow-md leading-tight">View More</span>
+                          </div>
                         </div>
-                        <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
-                          <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
-                          <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
+                      ) : (
+                        <div key={card.name!} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
+                          <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
+                            <Image src={card.img!} alt={card.name!} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
+                          </div>
+                          <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
+                            <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
+                            <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
+                          </div>
                         </div>
-                      </div>
+                      )
                     ))}
                   </div>
                 </div>
@@ -248,7 +275,7 @@ export default function HeroDemo3() {
                 id="booking-tabs-section"
                 className="w-full max-w-[900px] mx-auto min-h-[450px] sm:min-h-[420px] lg:min-h-70 mt-2 lg:mt-4"
               >
-                <BookingTabsHorizontal />
+                <BookingTabsHorizontal variant="demo3" />
               </div>
             </div>
           </div>
@@ -286,7 +313,7 @@ export default function HeroDemo3() {
       </section>
 
 
-      <section className="relative overflow-hidden py-8 sm:py-10 md:py-12 px-2 sm:px-6 bg-background transition-colors duration-300 w-full">
+      <section id="popular-destinations" className="relative overflow-hidden py-8 sm:py-10 md:py-12 px-2 sm:px-6 bg-background transition-colors duration-300 w-full">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroImages[currentImage]}

@@ -8,13 +8,13 @@ import BookingTabsHorizontal from '../bookings/BookingTabsHorizontal';
 
 // 7 local background images
 const heroImages = [
-  // '/hero/hero-1.png',
+  '/hero/hero-1.png',
   '/hero/hero-2.png',
-  // '/hero/hero-3.png',
-  // '/hero/hero-4.png',
-  // '/hero/hero-5.png',
-  // '/hero/hero-6.png',
-  // '/hero/hero-7.png',
+  '/hero/hero-3.png',
+  '/hero/hero-4.png',
+  '/hero/hero-5.png',
+  '/hero/hero-6.png',
+  '/hero/hero-7.png',
 ];
 
 // Stats bar data
@@ -49,14 +49,19 @@ const popularDestinations = [
     image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=800',
   },
   {
-    name: 'Ooty',
-    tagline: 'Queen of Nilgiris',
-    image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?q=80&w=800',
+    name: 'Dubai',
+    tagline: 'City of Gold',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800',
   },
   {
-    name: 'Lonavala',
-    tagline: 'Misty Waterfalls & Forts',
-    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800',
+    name: 'Maldives',
+    tagline: 'Tropical Paradise',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800',
+  },
+  {
+    name: 'Bali',
+    tagline: 'Island of Gods',
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800',
   },
   {
     name: 'Rishikesh',
@@ -162,18 +167,13 @@ export default function HeroDemo2() {
   }, [isDestPaused]);
 
   return (
-    <div id="home-demo2">
-      <section className="relative overflow-hidden min-h-[850px] lg:min-h-[700px]">
-        {/* Adaptive background — works in both light and dark mode */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
-        <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
+    <div id="home-demo2" className="bg-white">
+      <section className="relative overflow-hidden h-[500px] sm:h-[550px] lg:h-[600px] w-full">
         <div className="absolute inset-0 z-0">
-          {/* Images commented out — background gradient active */}
           {heroImages.map((image, index) => (
             <div
               key={image}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${currentImage === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${currentImage === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
             >
               <Image
                 src={image}
@@ -185,13 +185,14 @@ export default function HeroDemo2() {
               />
             </div>
           ))}
-          <div className="absolute inset-0 z-20 bg-black/10" />
-          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/40 via-black/5 to-transparent" />
-          <div className="absolute inset-0 z-20 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+          {/* Overlays to make text readable */}
+          <div className="absolute inset-0 z-20 bg-black/20" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/50 via-black/10 to-transparent" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent via-transparent to-black/40" />
         </div>
 
-        {/* Hero content grid — fixed top padding to prevent layout shift */}
-        <div className="relative inset-0 z-30 flex flex-col justify-start sm:px-6 pt-24 sm:pt-28 md:pt-24 lg:pt-28 pb-16 sm:pb-16 lg:pb-18">
+        {/* Hero content grid */}
+        <div className="relative z-30 flex flex-col justify-start pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-16 w-full h-full">
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 lg:gap-8 w-full">
               <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8">
@@ -228,88 +229,66 @@ export default function HeroDemo2() {
                     {[
                       { name: 'Goa', sub: 'Sun • Sand • Fun', img: '/hero/hero-6.png' },
                       { name: 'Kashmir', sub: 'Heaven on Earth', img: '/hero/hero-3.png' },
-                      { name: 'Rajasthan', sub: 'Royal Heritage', img: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=800' },
-                      { name: 'Kerala', sub: "God's Own Country", img: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800' },
-                    ].map((card) => (
-                      <div key={card.name} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
-                        <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
-                          <Image src={card.img} alt={card.name} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
+                      { name: 'Dubai', sub: 'City of Gold', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800' },
+                      { isMore: true },
+                    ].map((card, idx) => (
+                      card.isMore ? (
+                        <div
+                          key="more"
+                          onClick={() => {
+                            const section = document.getElementById('popular-destinations');
+                            if (section) section.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                          className="relative w-20 sm:w-24 lg:w-[105px] rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-all cursor-pointer shrink-0 snap-center h-[112px] sm:h-[128px] lg:h-[135px] group"
+                        >
+                          <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800" alt="More Destinations" fill className="object-cover blur-[2px] group-hover:blur-sm transition-all duration-300 scale-110" sizes="(max-width: 768px) 80px, 112px" />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-teal-500 flex items-center justify-center text-white mb-1.5 shadow-sm">
+                              <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 ml-0.5" />
+                            </div>
+                            <span className="text-[10px] lg:text-[11px] font-extrabold text-white text-center drop-shadow-md leading-tight">View More</span>
+                          </div>
                         </div>
-                        <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
-                          <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
-                          <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
+                      ) : (
+                        <div key={card.name!} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
+                          <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
+                            <Image src={card.img!} alt={card.name!} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
+                          </div>
+                          <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
+                            <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
+                            <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
+                          </div>
                         </div>
-                      </div>
+                      )
                     ))}
                   </div>
                 </div>
               </div>
-              <div
-                id="booking-tabs-section"
-                className="w-full max-w-[900px] mx-auto min-h-[450px] sm:min-h-[420px] lg:min-h-70 mt-2 lg:mt-4"
-              >
-                <BookingTabsHorizontal />
-              </div>
             </div>
           </div>
         </div>
-
-        {/* STATS BAR — positioned relatively below the booking tabs */}
-        <div className="relative z-30 w-full max-w-[1150px] mx-auto mt-10 sm:mt-[-25px] lg:mt-[-60px] px-4 sm:px-6 hidden sm:block">
-          <div
-            className="rounded-xl bg-[#f4f9ff]/95 backdrop-blur-md py-4 sm:py-5 px-6 sm:px-10 flex flex-wrap sm:flex-nowrap justify-between items-center text-slate-800 border border-teal-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-          >
-            {stats.map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={stat.label}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 group flex-1 text-center lg:text-left ${idx < 3 ? 'sm:border-r border-teal-200/50 sm:pr-2 lg:pr-4' : ''} ${idx > 0 ? 'sm:pl-2 lg:pl-4' : ''}`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-sm lg:text-base font-bold text-slate-900 leading-tight">
-                      {stat.value}
-                    </div>
-                    <div className="text-[10px] lg:text-[11px] font-medium text-slate-500 leading-tight">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
       </section>
 
-
-      <section className="relative overflow-hidden py-8 sm:py-10 md:py-12 px-2 sm:px-6 bg-background transition-colors duration-300 w-full">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={heroImages[currentImage]}
-            alt="Travel destination background"
-            fill
-            className="object-cover object-center transition-all duration-1000 opacity-15 dark:opacity-40"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-background/90 dark:bg-background/95 backdrop-blur-[2px] transition-colors duration-300" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/90 transition-colors duration-300" />
+      {/* --- OVERLAPPING BOOKING TABS --- */}
+      <section className="relative w-full px-4 sm:px-6 z-40 -mt-20 sm:-mt-24 lg:-mt-42">
+        <div id="booking-tabs-section" className="w-full max-w-[1150px] mx-auto min-h-[150px]">
+          <BookingTabsHorizontal />
         </div>
-        {/* <div className="relative z-30 w-full max-w-[1150px] mx-auto mt-[-15px] sm:mt-[-25px] lg:mt-[-60px] px-4 sm:px-6 hidden sm:block">
-          <div
-            className="rounded-xl bg-[#f4f9ff]/95 backdrop-blur-md py-4 sm:py-5 px-6 sm:px-10 flex flex-wrap sm:flex-nowrap justify-between items-center text-slate-800 border border-teal-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-          >
+      </section>
+
+      {/* --- STATS BAR --- */}
+      <section className="relative w-full px-2 sm:px-6 z-30 mt-6 sm:mt-8 lg:mt-4 hidden sm:block bg-white">
+        <div className="max-w-[1150px] mx-auto">
+          <div className="rounded-3xl bg-[#f0f7ff] py-4 sm:py-5 px-2 sm:px-10 flex flex-wrap sm:flex-nowrap justify-between items-center text-slate-800 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-blue-50">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
                 <div
                   key={stat.label}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 group flex-1 text-center lg:text-left ${idx < 3 ? 'sm:border-r border-teal-200/50 sm:pr-2 lg:pr-4' : ''} ${idx > 0 ? 'sm:pl-2 lg:pl-4' : ''}`}
+                  className={`flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 group flex-1 text-center lg:text-left ${idx < 3 ? 'sm:border-r border-teal-200/40 sm:pr-2 lg:pr-4' : ''} ${idx > 0 ? 'sm:pl-2 lg:pl-4' : ''}`}
                 >
-                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white">
+                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -324,28 +303,34 @@ export default function HeroDemo2() {
               );
             })}
           </div>
-        </div> */}
+        </div>
+      </section>
+
+      {/* --- POPULAR DESTINATIONS --- */}
+      <section id="popular-destinations" className="relative py-2 sm:py-6 md:py-8 px-2 sm:px-6 bg-white w-full">
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
             <div>
-              <p className="text-[10px] sm:text-xs font-extrabold tracking-[0.2em] text-teal-600 dark:text-teal-400 uppercase mb-1 drop-shadow-sm transition-colors duration-300">
-                — POPULAR DESTINATIONS —
-              </p>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-foreground tracking-tight drop-shadow-sm transition-colors duration-300">
-                Top Destinations for Your Next Adventure
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                <Plane className="w-6 h-6 text-teal-500 transform rotate-45" />
+                Popular Destinations
               </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+                Handpicked destinations for your next getaway
+              </p>
             </div>
-            <div className="flex items-center justify-between sm:justify-end gap-2.5">
+            <div className="flex items-center justify-between sm:justify-end">
               <Link
                 href="/#packages"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground bg-surface/90 hover:bg-surface border border-border rounded-full px-4 sm:px-5 py-2 sm:py-2.5 transition-all duration-200 w-fit whitespace-nowrap shadow-sm hover:shadow-md hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors"
               >
                 View All Destinations →
               </Link>
             </div>
           </div>
+
           <div
-            className="relative overflow-hidden -mx-2 px-2 py-1 select-none"
+            className="relative overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0 select-none"
             onMouseEnter={() => setIsDestPaused(true)}
             onMouseLeave={() => setIsDestPaused(false)}
             onTouchStart={handleTouchStart}
@@ -364,7 +349,7 @@ export default function HeroDemo2() {
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
                   <div
-                    className="group relative aspect-video rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-border/80 dark:border-white/20 backdrop-blur-sm"
+                    className="group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer border border-slate-100"
                     onClick={() => {
                       const el = document.getElementById('packages');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -377,41 +362,17 @@ export default function HeroDemo2() {
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-80" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                       <div>
-                        <h3 className="text-white font-bold text-sm leading-tight drop-shadow-sm">{dest.name}</h3>
-                        <p className="text-white/80 text-[11px] drop-shadow-sm">{dest.tagline}</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-white/90 text-slate-900 flex items-center justify-center group-hover:bg-teal-400 group-hover:text-black transition-colors shrink-0 shadow-sm text-xs font-bold ml-2">
-                        →
+                        <h3 className="text-white font-bold text-lg leading-tight drop-shadow-sm">{dest.name}</h3>
+                        <p className="text-white/90 text-xs mt-0.5 drop-shadow-sm font-medium">{dest.tagline}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-1.5 mt-4 sm:mt-5">
-            {popularDestinations.map((dest, idx) => {
-              const activeIndex = destIndex % popularDestinations.length;
-              const isActive = activeIndex === idx;
-              return (
-                <button
-                  key={dest.name}
-                  type="button"
-                  onClick={() => {
-                    setIsTransitioning(true);
-                    setDestIndex(idx);
-                  }}
-                  aria-label={`Go to ${dest.name}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${isActive
-                    ? 'w-6 bg-teal-500'
-                    : 'w-1.5 bg-foreground/25 hover:bg-foreground/50'
-                    }`}
-                />
-              );
-            })}
           </div>
         </div>
       </section>
