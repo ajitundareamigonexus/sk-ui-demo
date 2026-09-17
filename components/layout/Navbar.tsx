@@ -3,23 +3,31 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { Moon, Sun, Menu, X, LogOut, User as UserIcon, Compass, Phone, Mail, Headphones, Tag, ShieldCheck } from 'lucide-react';
+import { Moon, Sun, Menu, X, LogOut, User as UserIcon, Compass, Phone, Mail, Headphones, Tag, ShieldCheck, Home, Package, Car, LayoutTemplate } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { getCurrentUser, logout, type User } from '@/lib/authStore';
 import NavbarDemo2 from './NavbarDemo2';
 
+// const navLinks = [
+//   // { href: '/#about', label: 'ABOUT' },
+//   // { href: '/#services', label: 'SERVICES' },
+//   { href: '/#packages', label: 'PACKAGES' },
+//   { href: '/', label: 'DEMO 1' },
+//   { href: '/demo2', label: 'DEMO 2' },
+//   { href: '/demo3', label: 'DEMO 3' },
+//   // { href: '/#packages', label: 'PACKAGES' },
+//   // { href: '/#gallery', label: 'BOOK CAB' },
+//   // { href: '/my-bookings', label: 'MY BOOKIGS' },
+//   // { href: '/admin', label: 'ADMIN PANEL' },
+//   // { href: '/#contact', label: 'CONTACT' },
+// ];
 const navLinks = [
-  // { href: '/#about', label: 'ABOUT' },
-  // { href: '/#services', label: 'SERVICES' },
-  { href: '/#packages', label: 'PACKAGES' },
-  { href: '/', label: 'DEMO 1' },
-  { href: '/demo2', label: 'DEMO 2' },
-  { href: '/demo3', label: 'DEMO 3' },
-  // { href: '/#packages', label: 'PACKAGES' },
-  // { href: '/#gallery', label: 'BOOK CAB' },
-  // { href: '/my-bookings', label: 'MY BOOKIGS' },
-  // { href: '/admin', label: 'ADMIN PANEL' },
-  // { href: '/#contact', label: 'CONTACT' },
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/#packages', label: 'Tour Packages', icon: Package },
+  { href: '/', label: 'Cabs', icon: Car },
+  { href: '/', label: 'Demo 1', icon: LayoutTemplate },
+  { href: '/demo2', label: 'Demo 2', icon: LayoutTemplate },
+  { href: '/demo3', label: 'Demo 3', icon: LayoutTemplate },
 ];
 
 export default function Navbar() {
@@ -178,17 +186,18 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-8 text-sm font-semibold tracking-wide">
-          {activeLinks.map(({ href, label }) => (
+        <nav className="hidden xl:flex items-center p-4 gap-8 text-sm font-semibold tracking-wide">
+          {activeLinks.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className={`relative py-1 transition-colors duration-200
+              className={`relative flex flex-col justify-center items-center py-1 transition-colors duration-200
                          after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-0
                          after:bg-teal-400 after:rounded-full after:transition-all after:duration-300
                          hover:after:w-full
                          ${isSolid ? 'text-muted hover:text-primary' : 'text-white hover:text-teal-300'}`}
             >
+              <Icon size={20} className="mb-1" />
               {label}
             </Link>
           ))}

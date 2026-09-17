@@ -8,7 +8,7 @@ import { Menu, X, User as UserIcon, Phone, Car, Package, Home, LayoutTemplate, H
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/#packages', label: 'Tour Packages', icon: Package },
-  { href: '/cabs', label: 'Cabs', icon: Car },
+  { href: '/', label: 'Cabs', icon: Car },
   { href: '/', label: 'Demo 1', icon: LayoutTemplate },
   { href: '/demo2', label: 'Demo 2', icon: LayoutTemplate },
   { href: '/demo3', label: 'Demo 3', icon: LayoutTemplate },
