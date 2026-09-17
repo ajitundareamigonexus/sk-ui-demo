@@ -267,7 +267,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
         onClose={() => setIsEnquiryModalOpen(false)}
       />
       <div className={`w-full rounded-[1.25rem] p-4 sm:p-5 lg:p-4 relative shadow-xl flex flex-col gap-4 ${variant === 'demo3'
-        ? 'bg-teal-950/50 backdrop-blur-xl border border-teal-400/25'
+        ? 'bg-teal-600/20 backdrop-blur-xl border border-teal-400/25'
         : 'bg-white'
         }`}>
         {/* ── Main Category Switcher ── */}
