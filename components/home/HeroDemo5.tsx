@@ -193,9 +193,9 @@ export default function HeroDemo5() {
 
         {/* Hero content - Replaced with BookingTabsHorizontal centered */}
         <div className="relative z-30 flex flex-col justify-center items-center min-h-full w-full pt-28 sm:pt-32 lg:pt-36 pb-8 max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <section className="relative w-full px-2 sm:px-2 z-40">
+          <section className="relative w-full px-2 sm:px-2 z-50">
             <div id="booking-tabs-section" className="w-full max-w-[1150px] mx-auto min-h-[150px]">
-              <BookingTabsHorizontal />
+              <BookingTabsHorizontal variant="demo5" />
             </div>
           </section>
 

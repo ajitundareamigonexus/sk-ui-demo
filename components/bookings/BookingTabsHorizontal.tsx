@@ -62,7 +62,7 @@ const packageTypes = [
   'Weekend Getaway',
 ];
 
-export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' | 'demo3' }) {
+export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' | 'demo3' | 'demo5' }) {
   const router = useRouter();
 
   const [mainTab, setMainTab] = useState<'cab' | 'packages' | 'hotels' | 'enquiry'>('cab');
@@ -268,10 +268,12 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
       />
       <div className={`w-full rounded-[1.25rem] p-2 sm:p-5 lg:p-4 relative shadow-xl flex flex-col gap-4 ${variant === 'demo3'
         ? 'bg-teal-600/20 backdrop-blur-xl border border-teal-400/25'
-        : 'bg-white'
+        : variant === 'demo5'
+          ? 'bg-white/30 backdrop-blur-xl border border-white/30'
+          : 'bg-white'
         }`}>
         {/* ── Main Category Switcher ── */}
-        <div className="flex items-center gap-2 sm:gap-3 mb-3 overflow-x-auto hide-scrollbar pb-1 w-full snap-x">
+        <div className={`flex items-center gap-2 sm:gap-3 mb-3 overflow-x-auto hide-scrollbar pb-1 w-full snap-x ${variant === 'demo5' ? 'justify-center' : ''}`}>
           <button
             type="button"
             onClick={() => {
@@ -282,7 +284,9 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
+                : variant === 'demo5'
+                  ? 'bg-black/20 text-white hover:bg-black/50  border-white/20 backdrop-blur-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
               }`}
           >
             <Car size={16} />
@@ -300,7 +304,9 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
+                : variant === 'demo5'
+                  ? 'bg-black/20 text-white hover:bg-black/50  border-white/20 backdrop-blur-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
               }`}
           >
             <Package size={16} />
@@ -318,7 +324,9 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
+                : variant === 'demo5'
+                  ? 'bg-black/20 text-white hover:bg-black/50  border-white/20 backdrop-blur-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
               }`}
           >
             <Building2 size={16} />
@@ -333,7 +341,9 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
+                : variant === 'demo5'
+                  ? 'bg-black/20 text-white hover:bg-black/50  border-white/20 backdrop-blur-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200 shadow-sm'
               }`}
           >
             <Building2 size={16} />
@@ -343,12 +353,13 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
 
         {/* ── Cab Booking Sub-Tabs (Only visible when CAB Booking is active) ── */}
         {mainTab === 'cab' && (
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pb-2 w-full">
+          <div className={`flex flex-wrap items-center gap-3 sm:gap-4 pb-2 w-full ${variant === 'demo5' ? 'justify-center' : ''}`}>
             {cabTabs.map(({ id, label }) => (
               <label
                 key={id}
-                className={`flex items-center gap-2 cursor-pointer transition-colors ${variant === 'demo3' ? 'text-white' : 'text-slate-700'
-                  }`}
+                className={`flex items-center gap-2 cursor-pointer transition-all ${variant === 'demo3'
+                  ? 'text-white-700'
+                  : ''}`}
               >
                 <input
                   type="radio"
@@ -359,7 +370,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                     setCabTab(id);
                     setError('');
                   }}
-                  className={`w-4 h-4 cursor-pointer accent-teal-500 ${variant === 'demo3' ? 'border-white/50 bg-transparent' : ''}`}
+                  className={`w-4 h-4 cursor-pointer accent-teal-500 ${variant === 'demo3' || variant === 'demo5' ? 'border-white/50 bg-transparent' : ''}`}
                 />
                 <span className="text-sm font-bold whitespace-nowrap">{label}</span>
               </label>

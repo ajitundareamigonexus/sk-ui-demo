@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import ContactForm from "./ContactForm";
@@ -16,6 +17,12 @@ export default function ContactFormModal({
   selectedPackage,
   onClose,
 }: ContactFormModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Lock body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -37,7 +44,7 @@ export default function ContactFormModal({
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -47,7 +54,7 @@ export default function ContactFormModal({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md overflow-y-auto"
         >
           <motion.div
             key="contact-modal-content"
@@ -76,4 +83,8 @@ export default function ContactFormModal({
       )}
     </AnimatePresence>
   );
+
+  if (!mounted) return null;
+
+  return createPortal(modalContent, document.body);
 }
