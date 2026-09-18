@@ -28,6 +28,8 @@ const navLinks = [
   { href: '/', label: 'Demo 1', icon: LayoutTemplate },
   { href: '/demo2', label: 'Demo 2', icon: LayoutTemplate },
   { href: '/demo3', label: 'Demo 3', icon: LayoutTemplate },
+  { href: '/demo4', label: 'Demo 4', icon: LayoutTemplate },
+  { href: '/demo5', label: 'Demo 5', icon: LayoutTemplate },
 ];
 
 export default function Navbar() {
@@ -101,7 +103,7 @@ export default function Navbar() {
     return true;
   });
 
-  const isTransparentPage = pathname === '/' || pathname === '/demo2' || pathname === '/demo3';
+  const isTransparentPage = pathname === '/' || pathname === '/demo2' || pathname === '/demo3' || pathname === '/demo4' || pathname === '/demo5';
   const isSolid = scrolled || !isTransparentPage;
 
   if (pathname === '/demo2') {

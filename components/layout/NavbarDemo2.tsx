@@ -12,6 +12,8 @@ const navLinks = [
   { href: '/', label: 'Demo 1', icon: LayoutTemplate },
   { href: '/demo2', label: 'Demo 2', icon: LayoutTemplate },
   { href: '/demo3', label: 'Demo 3', icon: LayoutTemplate },
+  { href: '/demo4', label: 'Demo 4', icon: LayoutTemplate },
+  { href: '/demo5', label: 'Demo 5', icon: LayoutTemplate },
 ];
 
 export default function NavbarDemo2() {

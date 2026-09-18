@@ -163,7 +163,7 @@ export default function Hero() {
 
   return (
     <div id="home">
-      <section className="relative overflow-hidden min-h-[680px] sm:min-h-[720px] lg:min-h-[680px]">
+      <section className="relative overflow-hidden min-h-[680px] sm:min-h-[720px] lg:min-h-[580px]">
         {/* Adaptive background — works in both light and dark mode */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
         <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
@@ -191,7 +191,7 @@ export default function Hero() {
         </div>
 
         {/* Hero content grid — vertically centered between navbar and stats bar */}
-        <div className="relative inset-0 z-30 flex flex-col justify-center sm:px-6 pt-20 sm:pt-36 md:pt-32 pb-6 sm:pb-32 md:pb-36">
+        <div className="relative inset-0 z-30 flex flex-col justify-center sm:px-6 pt-20 sm:pt-36 md:pt-32 pb-2 sm:pb-32 md:pb-26">
           <div className="max-w-7xl mx-auto w-full mx-10">
             <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-5 lg:gap-10 items-start lg:items-center w-full">
               <div className="flex flex-col gap-4">

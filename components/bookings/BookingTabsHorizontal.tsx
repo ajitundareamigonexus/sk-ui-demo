@@ -266,19 +266,19 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
         selectedPackage=""
         onClose={() => setIsEnquiryModalOpen(false)}
       />
-      <div className={`w-full rounded-[1.25rem] p-4 sm:p-5 lg:p-4 relative shadow-xl flex flex-col gap-4 ${variant === 'demo3'
+      <div className={`w-full rounded-[1.25rem] p-2 sm:p-5 lg:p-4 relative shadow-xl flex flex-col gap-4 ${variant === 'demo3'
         ? 'bg-teal-600/20 backdrop-blur-xl border border-teal-400/25'
         : 'bg-white'
         }`}>
         {/* ── Main Category Switcher ── */}
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-2 sm:gap-3 mb-3 overflow-x-auto hide-scrollbar pb-1 w-full snap-x">
           <button
             type="button"
             onClick={() => {
               setMainTab('cab');
               setError('');
             }}
-            className={`h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-sm font-extrabold transition-all duration-200 cursor-pointer border ${mainTab === 'cab'
+            className={`h-9 sm:h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-200 cursor-pointer border shrink-0 snap-start ${mainTab === 'cab'
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
@@ -286,7 +286,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               }`}
           >
             <Car size={16} />
-            <span>CAB Booking</span>
+            <span className="whitespace-nowrap">CAB Booking</span>
           </button>
 
           <button
@@ -296,7 +296,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               setError('');
               setPkgSuccess(false);
             }}
-            className={`h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-sm font-extrabold transition-all duration-200 cursor-pointer border ${mainTab === 'packages'
+            className={`h-9 sm:h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-200 cursor-pointer border shrink-0 snap-start ${mainTab === 'packages'
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
@@ -304,7 +304,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               }`}
           >
             <Package size={16} />
-            <span>Travel Packages</span>
+            <span className="whitespace-nowrap">Travel Packages</span>
           </button>
 
           <button
@@ -314,7 +314,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               setError('');
               setHotelSuccess(false);
             }}
-            className={`h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-sm font-extrabold transition-all duration-200 cursor-pointer border ${mainTab === 'hotels'
+            className={`h-9 sm:h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-200 cursor-pointer border shrink-0 snap-start ${mainTab === 'hotels'
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
@@ -322,14 +322,14 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               }`}
           >
             <Building2 size={16} />
-            <span>Hotels</span>
+            <span className="whitespace-nowrap">Hotels</span>
           </button>
           <button
             type="button"
             onClick={() => {
               setIsEnquiryModalOpen(true);
             }}
-            className={`h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-sm font-extrabold transition-all duration-200 cursor-pointer border ${mainTab === 'enquiry'
+            className={`h-9 sm:h-10 px-4 sm:px-6 flex items-center justify-center gap-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all duration-200 cursor-pointer border shrink-0 snap-start ${mainTab === 'enquiry'
               ? 'bg-teal-500 text-white shadow-md border-transparent'
               : variant === 'demo3'
                 ? 'bg-white/10 text-white/80 hover:bg-white/20 border-white/20'
@@ -337,13 +337,13 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               }`}
           >
             <Building2 size={16} />
-            <span>Enquiry</span>
+            <span className="whitespace-nowrap">Enquiry</span>
           </button>
         </div>
 
         {/* ── Cab Booking Sub-Tabs (Only visible when CAB Booking is active) ── */}
         {mainTab === 'cab' && (
-          <div className="flex items-center gap-4 overflow-x-auto  snap-x ">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pb-2 w-full">
             {cabTabs.map(({ id, label }) => (
               <label
                 key={id}

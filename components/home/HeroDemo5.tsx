@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Users, MapPin, Headphones, Building2, ChevronLeft, ChevronRight, Plane, ShieldCheck, Star } from 'lucide-react';
+import { Users, MapPin, ShieldCheck, Star, Plane } from 'lucide-react';
 import BookingTabsHorizontal from '../bookings/BookingTabsHorizontal';
 
 // 7 local background images
@@ -75,7 +75,7 @@ const popularDestinations = [
   },
 ];
 
-export default function HeroDemo2() {
+export default function HeroDemo5() {
   const [currentImage, setCurrentImage] = useState(0);
 
   const [destIndex, setDestIndex] = useState(0);
@@ -167,8 +167,8 @@ export default function HeroDemo2() {
   }, [isDestPaused]);
 
   return (
-    <div id="home-demo2" className="bg-white">
-      <section className="relative overflow-hidden min-h-[500px] sm:min-h-[550px] lg:min-h-[600px] w-full pb-20 sm:pb-24 lg:pb-32">
+    <div id="home-demo5" className="bg-white">
+      <section className="relative overflow-hidden min-h-[650px] sm:min-h-[800px] lg:min-h-[600px] w-full pb-6">
         <div className="absolute inset-0 z-0">
           {heroImages.map((image, index) => (
             <div
@@ -191,89 +191,35 @@ export default function HeroDemo2() {
           <div className="absolute inset-0 z-20 bg-gradient-to-b from-transparent via-transparent to-black/40" />
         </div>
 
-        {/* Hero content grid */}
-        <div className="relative z-30 flex flex-col justify-start pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-16 w-full min-h-full">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-6 lg:gap-8 w-full">
-              <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8">
-                {/* Left Side: Text */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-2 sm:gap-4 lg:gap-5 mt-4 md:mt-0">
-                  <p className="text-sm sm:text-base md:text-lg font-medium tracking-wide text-white/90 drop-shadow-md">
-                    Your Next Adventure Awaits
-                  </p>
-
-                  <div className="flex flex-col items-center md:items-start">
-                    <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight drop-shadow-lg text-center md:text-left">
-                      Explore the World with
-                    </h1>
-                    <span className="font-script text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold text-yellow-400 leading-none block mt-1 drop-shadow-lg text-center md:text-left">
-                      SK Tours & Travels
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm md:text-base font-medium text-white/90 mt-1 md:mt-2 flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 flex-wrap drop-shadow-md">
-                    <span>Comfortable Rides</span>
-                    <span className="text-white/60">•</span>
-                    <span>Amazing Destinations</span>
-                    <span className="text-white/60">•</span>
-                    <span>Unforgettable Memories</span>
-                  </p>
-                </div>
-
-                {/* Right Side: Cards */}
-                <div className="flex flex-col items-center md:items-end gap-2 md:gap-3 shrink-0">
-                  <div className="flex items-center gap-2 text-white font-script text-2xl sm:text-3xl lg:text-4xl drop-shadow-lg mb-1 md:mb-2 text-center md:text-right">
-                    <span className="leading-tight">More Destinations<br />More Memories</span>
-                    <Plane className="w-6 h-6 lg:w-8 lg:h-8 transform rotate-45 -mt-4 opacity-90" />
-                  </div>
-                  <div className="flex gap-2 sm:gap-3 overflow-x-auto max-w-[100vw] px-4 md:px-0 pb-2 md:pb-0 snap-x hide-scrollbar">
-                    {[
-                      { name: 'Goa', sub: 'Sun • Sand • Fun', img: '/hero/hero-6.png' },
-                      { name: 'Kashmir', sub: 'Heaven on Earth', img: '/hero/hero-3.png' },
-                      { name: 'Dubai', sub: 'City of Gold', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800' },
-                      { isMore: true },
-                    ].map((card, idx) => (
-                      card.isMore ? (
-                        <div
-                          key="more"
-                          onClick={() => {
-                            const section = document.getElementById('popular-destinations');
-                            if (section) section.scrollIntoView({ behavior: 'smooth' });
-                          }}
-                          className="relative w-20 sm:w-24 lg:w-[105px] rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-all cursor-pointer shrink-0 snap-center h-[112px] sm:h-[128px] lg:h-[135px] group"
-                        >
-                          <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800" alt="More Destinations" fill className="object-cover blur-[2px] group-hover:blur-sm transition-all duration-300 scale-110" sizes="(max-width: 768px) 80px, 112px" />
-                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-teal-500 flex items-center justify-center text-white mb-1.5 shadow-sm">
-                              <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 ml-0.5" />
-                            </div>
-                            <span className="text-[10px] lg:text-[11px] font-extrabold text-white text-center drop-shadow-md leading-tight">View More</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div key={card.name!} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
-                          <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
-                            <Image src={card.img!} alt={card.name!} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
-                          </div>
-                          <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
-                            <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
-                            <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
-                          </div>
-                        </div>
-                      )
-                    ))}
-                  </div>
-                </div>
-              </div>
+        {/* Hero content - Replaced with BookingTabsHorizontal centered */}
+        <div className="relative z-30 flex flex-col justify-center items-center min-h-full w-full pt-28 sm:pt-32 lg:pt-36 pb-8 max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <section className="relative w-full px-2 sm:px-2 z-40">
+            <div id="booking-tabs-section" className="w-full max-w-[1150px] mx-auto min-h-[150px]">
+              <BookingTabsHorizontal />
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* --- OVERLAPPING BOOKING TABS --- */}
-      <section className="relative w-full px-4 sm:px-6 z-40 -mt-25 sm:-mt-34 lg:-mt-52">
-        <div id="booking-tabs-section" className="w-full max-w-[1150px] mx-auto min-h-[150px]">
-          <BookingTabsHorizontal />
+          <div className="items-center text-center gap-2 sm:gap-3 lg:gap-4 mt-6 sm:mt-10 lg:mt-12 relative z-40">
+            <p className="text-sm sm:text-base md:text-lg font-medium tracking-wide text-white/90 drop-shadow-md">
+              Your Next Adventure Awaits
+            </p>
+
+            <div className="flex flex-wrap items-baseline justify-center gap-2 sm:gap-3">
+              <h1 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.1] tracking-tight drop-shadow-lg">
+                Explore the World with
+              </h1>
+              <span className="font-script text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold text-yellow-400 leading-none drop-shadow-lg">
+                SK Tours & Travels
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm md:text-base font-medium text-white/90 mt-1 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap drop-shadow-md">
+              <span>Comfortable Rides</span>
+              <span className="text-white/60">•</span>
+              <span>Amazing Destinations</span>
+              <span className="text-white/60">•</span>
+              <span>Unforgettable Memories</span>
+            </p>
+          </div>
         </div>
       </section>
 

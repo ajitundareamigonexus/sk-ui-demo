@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Users, MapPin, Headphones, Building2, ChevronLeft, ChevronRight, Plane, ShieldCheck, Star } from 'lucide-react';
-import BookingTabsHorizontal from '../bookings/BookingTabsHorizontal';
+import { Users, MapPin, Headphones, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
+import BookingTabs from '../bookings/BookingTabs';
 
 // 7 local background images
 const heroImages = [
@@ -19,10 +19,10 @@ const heroImages = [
 
 // Stats bar data
 const stats = [
-  { icon: Users, value: '5000+', label: 'Happy Customers' },
+  { icon: Users, value: '5000+', label: 'Happy Travelers' },
   { icon: MapPin, value: '100+', label: 'Destinations' },
-  { icon: ShieldCheck, value: 'Safe & Trusted', label: 'Reliable Service' },
-  { icon: Star, value: 'Best Deals', label: 'on Cabs & Tour Packages' },
+  { icon: Headphones, value: '24/7', label: 'Customer Support' },
+  { icon: Building2, value: '50+', label: 'Corporate Clients' },
 ];
 
 const popularDestinations = [
@@ -49,19 +49,14 @@ const popularDestinations = [
     image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=800',
   },
   {
-    name: 'Dubai',
-    tagline: 'City of Gold',
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800',
+    name: 'Ooty',
+    tagline: 'Queen of Nilgiris',
+    image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?q=80&w=800',
   },
   {
-    name: 'Maldives',
-    tagline: 'Tropical Paradise',
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800',
-  },
-  {
-    name: 'Bali',
-    tagline: 'Island of Gods',
-    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800',
+    name: 'Lonavala',
+    tagline: 'Misty Waterfalls & Forts',
+    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800',
   },
   {
     name: 'Rishikesh',
@@ -75,7 +70,7 @@ const popularDestinations = [
   },
 ];
 
-export default function HeroDemo3() {
+export default function HeroDemo4() {
   const [currentImage, setCurrentImage] = useState(0);
 
   const [destIndex, setDestIndex] = useState(0);
@@ -167,14 +162,12 @@ export default function HeroDemo3() {
   }, [isDestPaused]);
 
   return (
-    <div id="home-demo2">
-      <section className="relative overflow-hidden min-h-[700px] lg:min-h-[600px]">
+    <div id="home-demo4">
+      <section className="relative overflow-hidden min-h-[800px] sm:min-h-[900px] lg:min-h-[520px]">
         {/* Adaptive background — works in both light and dark mode */}
-        <div className="absolute inset-x-0 top-0 h-[75%] z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
-        <div className="absolute inset-x-0 top-0 h-[75%] z-0 opacity-20 dark:opacity-10" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
-        {/* White background for the lower section */}
-        <div className="absolute inset-x-0 bottom-0 h-[25%] z-[1] bg-background" />
-        <div className="absolute inset-x-0 top-0 h-[75%] z-0">
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-800 dark:from-slate-950 dark:via-teal-900/40 dark:to-slate-900" />
+        <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.2) 0%, transparent 50%)' }} />
+        <div className="absolute inset-0 z-0">
           {/* Images commented out — background gradient active */}
           {heroImages.map((image, index) => (
             <div
@@ -197,128 +190,117 @@ export default function HeroDemo3() {
           <div className="absolute inset-0 z-20 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
         </div>
 
-        {/* Hero content grid — fixed top padding to prevent layout shift */}
-        <div className="relative inset-0 z-30 flex flex-col justify-start sm:px-6 pt-24 sm:pt-28 md:pt-24 lg:pt-28 pb-10 sm:pb-8 lg:pb-10">
+        {/* Hero content grid — vertically centered between navbar and stats bar */}
+        <div className="relative z-30 flex flex-col justify-start lg:justify-center sm:px-6 pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-32 lg:pb-24">
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-6 lg:gap-8 w-full">
-              <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8">
-                {/* Left Side: Text */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-2 sm:gap-4 lg:gap-5 mt-4 md:mt-0">
-                  <p className="text-sm sm:text-base md:text-lg font-medium tracking-wide text-white/90 drop-shadow-md">
-                    Your Next Adventure Awaits
-                  </p>
+            <div className="flex flex-col-reverse lg:grid lg:grid-cols-[0.85fr_1.15fr] gap-5 lg:gap-10 items-start w-full">
 
-                  <div className="flex flex-col items-center md:items-start">
-                    <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight drop-shadow-lg text-center md:text-left">
-                      Explore the World with
-                    </h1>
-                    <span className="font-script text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold text-yellow-400 leading-none block mt-1 drop-shadow-lg text-center md:text-left">
-                      SK Tours & Travels
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm md:text-base font-medium text-white/90 mt-1 md:mt-2 flex items-center justify-center md:justify-start gap-1.5 sm:gap-2 flex-wrap drop-shadow-md hidden sm:block">
-                    <span>Comfortable Rides</span>
-                    <span className="text-white/60">•</span>
-                    <span>Amazing Destinations</span>
-                    <span className="text-white/60">•</span>
-                    <span>Unforgettable Memories</span>
-                  </p>
-                </div>
+              {/* Booking Tabs on Left (in flex row context) */}
+              <div
+                id="booking-tabs-section"
+                className="lg:mr-auto lg:w-full lg:max-w-[460px] lg:min-h-[350px] w-full mt-6 lg:mt-0"
+              >
+                <BookingTabs />
+              </div>
 
-                {/* Right Side: Cards */}
-                <div className="flex flex-col items-center md:items-end gap-2 md:gap-3 shrink-0 hidden sm:block">
-                  <div className="flex items-center gap-2 text-white font-script text-2xl sm:text-3xl lg:text-4xl drop-shadow-lg mb-1 md:mb-2 text-center md:text-right hidden sm:block">
-                    <span className="leading-tight">More Destinations<br />More Memories</span>
-                    <Plane className="w-6 h-6 lg:w-8 lg:h-8 transform rotate-45 -mt-4 opacity-90" />
-                  </div>
-                  <div className="flex gap-2 sm:gap-3 overflow-x-auto max-w-[100vw] px-4 md:px-0 pb-2 md:pb-0 snap-x hide-scrollbar">
-                    {[
-                      { name: 'Goa', sub: 'Sun • Sand • Fun', img: '/hero/hero-6.png' },
-                      { name: 'Kashmir', sub: 'Heaven on Earth', img: '/hero/hero-3.png' },
-                      { name: 'Dubai', sub: 'City of Gold', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800' },
-                      { isMore: true },
-                    ].map((card, idx) => (
-                      card.isMore ? (
-                        <div
-                          key="more"
-                          onClick={() => {
-                            const section = document.getElementById('popular-destinations');
-                            if (section) section.scrollIntoView({ behavior: 'smooth' });
-                          }}
-                          className="relative w-20 sm:w-24 lg:w-[105px] rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-all cursor-pointer shrink-0 snap-center h-[112px] sm:h-[128px] lg:h-[135px] group"
-                        >
-                          <Image src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800" alt="More Destinations" fill className="object-cover blur-[2px] group-hover:blur-sm transition-all duration-300 scale-110" sizes="(max-width: 768px) 80px, 112px" />
-                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-teal-500 flex items-center justify-center text-white mb-1.5 shadow-sm">
-                              <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6 ml-0.5" />
-                            </div>
-                            <span className="text-[10px] lg:text-[11px] font-extrabold text-white text-center drop-shadow-md leading-tight">View More</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div key={card.name!} className="w-20 sm:w-24 lg:w-[105px] bg-white rounded-2xl overflow-hidden shadow-xl border-[3px] border-white hover:-translate-y-1 transition-transform cursor-pointer shrink-0 snap-center">
-                          <div className="relative h-16 sm:h-20 lg:h-[85px] w-full">
-                            <Image src={card.img!} alt={card.name!} fill className="object-cover" sizes="(max-width: 768px) 80px, 112px" />
-                          </div>
-                          <div className="p-1 sm:p-1.5 text-center bg-white flex flex-col items-center justify-center h-12 lg:h-[50px]">
-                            <div className="text-[11px] lg:text-xs font-extrabold text-slate-800 leading-tight">{card.name}</div>
-                            <div className="text-[8px] lg:text-[9px] font-medium text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis leading-tight mt-0.5 w-full">{card.sub}</div>
-                          </div>
-                        </div>
-                      )
-                    ))}
+              {/* Text part on Right */}
+              <div className="flex flex-col gap-4 lg:ml-46 w-full items-start text-left">
+                <p className="text-xs sm:text-sm font-extrabold tracking-[0.22em] text-white/80 uppercase flex items-center gap-2 drop-shadow-sm justify-start w-full">
+                  <span>EXPERIENCE</span>
+                  <span className="text-teal-400">•</span>
+                  <span>EXPLORE</span>
+                  <span className="text-teal-400">•</span>
+                  <span>TRAVEL</span>
+                </p>
+
+                <div className="w-full flex flex-col items-start">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tight drop-shadow-lg">
+                    Let&apos;s Make
+                  </h1>
+                  <span className="font-script text-5xl sm:text-6xl md:text-7xl font-bold text-teal-300 leading-none block -mt-1 drop-shadow-lg text-left w-full">
+                    Travel Happen
+                  </span>
+                  <div className="flex items-center justify-start gap-2 sm:gap-3 lg:gap-4 pt-4 w-full">
+                    {/* Explore India badge */}
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent('openPackagesTab'))}
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200 drop-shadow-xl cursor-pointer focus:outline-none"
+                      title="Explore India Packages"
+                    >
+                      <Image src="/badges/explore-india.jpg" alt="Explore India" fill className="object-cover rounded-full" sizes="(max-width:640px) 64px, (max-width:1024px) 80px, 96px" />
+                    </button>
+
+                    {/* International Travel Packages badge */}
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent('openPackagesTab'))}
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200 drop-shadow-xl cursor-pointer focus:outline-none"
+                      title="International Travel Packages"
+                    >
+                      <Image src="/badges/international.jpg" alt="International Travel Packages" fill className="object-cover rounded-full" sizes="(max-width:640px) 64px, (max-width:1024px) 80px, 96px" />
+                    </button>
+
+                    {/* Book Cab badge */}
+                    <a
+                      href="#booking-tabs-section"
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full shrink-0 hover:scale-110 active:scale-95 transition-transform duration-200 drop-shadow-xl focus:outline-none"
+                      title="Book Cab"
+                    >
+                      <Image src="/badges/book-cab.jpg" alt="Book Cab" fill className="object-cover rounded-full" sizes="(max-width:640px) 64px, (max-width:1024px) 80px, 96px" />
+                    </a>
                   </div>
                 </div>
               </div>
-              {/* <div
-                id="booking-tabs-section"
-                className="w-full max-w-[900px] mx-auto min-h-[450px] sm:min-h-[420px] lg:min-h-70 mt-2 lg:mt-4"
-              >
-                <BookingTabsHorizontal variant="demo3" />
-              </div> */}
             </div>
           </div>
         </div>
-        <section id="booking-tabs-section" className="relative w-full px-4 sm:px-6 z-40 mt-2 sm:mt-4 lg:mt-2">
-          <div className="w-full max-w-[1150px] mx-auto min-h-[150px]">
-            <BookingTabsHorizontal variant="demo3" />
-          </div>
-        </section>
 
-        {/* STATS BAR — positioned relatively below the booking tabs */}
-        {/* <div className="relative z-30 w-full max-w-[1150px] mx-auto mt-10 sm:mt-[-25px] lg:mt-[-60px] px-4 sm:px-6 hidden sm:block">
+        {/* STATS BAR — absolutely pinned to bottom, never moves */}
+        <div className="absolute bottom-4 sm:bottom-5 left-3 right-3 sm:left-6 sm:right-6 z-30 hidden sm:block ">
           <div
-            className="rounded-xl bg-[#f4f9ff]/95 backdrop-blur-md py-4 sm:py-5 px-6 sm:px-10 flex flex-wrap sm:flex-nowrap justify-between items-center text-slate-800 border border-teal-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+            className="max-w-7xl mx-auto rounded-2xl sm:rounded-3xl border border-white/15 bg-black/20 backdrop-blur-full py-3 sm:py-4 px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 items-center text-white"
+            style={{ boxShadow: 'var(--shadow-lg)' }}
           >
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
                 <div
                   key={stat.label}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 group flex-1 text-center lg:text-left ${idx < 3 ? 'sm:border-r border-teal-200/50 sm:pr-2 lg:pr-4' : ''} ${idx > 0 ? 'sm:pl-2 lg:pl-4' : ''}`}
+                  className={`flex items-center gap-2 sm:gap-3 group ${idx < 3 ? 'sm:border-r border-white/10 sm:pr-3 lg:pr-4' : ''}`}
                 >
-                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white">
-                    <Icon className="w-5 h-5" />
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center text-teal-300 shrink-0 shadow-sm group-hover:scale-110 group-hover:bg-teal-400 group-hover:text-slate-950 transition-all duration-200">
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
                   </div>
                   <div>
-                    <div className="text-sm lg:text-base font-bold text-slate-900 leading-tight">
+                    <div className="text-lg sm:text-2xl font-black text-white tracking-tight leading-none">
                       {stat.value}
                     </div>
-                    <div className="text-[10px] lg:text-[11px] font-medium text-slate-500 leading-tight">
+                    <div className="text-[10px] sm:text-sm font-medium text-white/70 tracking-wide mt-0.5">
                       {stat.label}
                     </div>
                   </div>
                 </div>
               );
             })}
+
+            {/* Quote */}
+            <div className="col-span-2 sm:col-span-4 lg:col-span-1 flex items-center justify-center border-t sm:border-t-0 lg:border-l border-white/10 pt-2.5 sm:pt-0 lg:pl-4">
+              <div className="flex items-center gap-1.5 text-center">
+                <span className="text-amber-400 text-2xl sm:text-4xl font-serif leading-none select-none">&ldquo;</span>
+                <p className="font-script text-base sm:text-xl font-bold text-white leading-tight">
+                  Not just trips,<br />we create memories
+                </p>
+                <span className="text-amber-400 text-2xl sm:text-4xl font-serif leading-none select-none">&rdquo;</span>
+              </div>
+            </div>
           </div>
-        </div> */}
+        </div>
 
       </section>
 
 
-      <section id="popular-destinations" className="relative overflow-hidden py-8 sm:py-10 md:py-12 px-2 sm:px-6 bg-background transition-colors duration-300 w-full">
+      <section className="relative overflow-hidden py-8 sm:py-10 md:py-12 px-3 sm:px-6 bg-background transition-colors duration-300 w-full">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroImages[currentImage]}
@@ -330,33 +312,7 @@ export default function HeroDemo3() {
           <div className="absolute inset-0 bg-background/90 dark:bg-background/95 backdrop-blur-[2px] transition-colors duration-300" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/90 transition-colors duration-300" />
         </div>
-        {/* <div className="relative z-30 w-full max-w-[1150px] mx-auto mt-[-15px] sm:mt-[-25px] lg:mt-[-60px] px-4 sm:px-6 hidden sm:block">
-          <div
-            className="rounded-xl bg-[#f4f9ff]/95 backdrop-blur-md py-4 sm:py-5 px-6 sm:px-10 flex flex-wrap sm:flex-nowrap justify-between items-center text-slate-800 border border-teal-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
-          >
-            {stats.map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={stat.label}
-                  className={`flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-3 group flex-1 text-center lg:text-left ${idx < 3 ? 'sm:border-r border-teal-200/50 sm:pr-2 lg:pr-4' : ''} ${idx > 0 ? 'sm:pl-2 lg:pl-4' : ''}`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-sm lg:text-base font-bold text-slate-900 leading-tight">
-                      {stat.value}
-                    </div>
-                    <div className="text-[10px] lg:text-[11px] font-medium text-slate-500 leading-tight">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div> */}
+
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5 sm:mb-6">
             <div>

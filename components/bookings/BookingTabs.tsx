@@ -219,7 +219,7 @@ export default function BookingTabs() {
 
   return (
     <div
-      className="w-[98%] sm:w-[80%] md:w-[60%] lg:w-[100%] rounded-2xl border border-white/10 bg-black/20 backdrop-blur-full p-2.5 sm:p-3.5 relative text-white"
+      className="w-[78%] sm:w-[80%] md:w-[60%] lg:w-[100%] rounded-2xl border border-white/10 bg-black/20 backdrop-blur-full p-2.5 sm:p-2.5 relative text-white"
       style={{ boxShadow: 'var(--shadow-lg)' }}
     >
       {/* ── Main Category Switcher (CAB Booking vs Travel Packages) ── */}
@@ -361,7 +361,7 @@ export default function BookingTabs() {
               {/* CTA */}
               <button
                 onClick={handlePackageEnquiry}
-                className="w-full h-7 rounded-lg font-bold text-xs transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
+                className="w-full h-7 rounded-lg mt-3 font-bold text-xs transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
                 style={{ background: 'linear-gradient(135deg, #14b8a6, #06b6d4)', color: '#000' }}
               >
                 <Package size={13} />
@@ -454,7 +454,7 @@ export default function BookingTabs() {
           )}
 
           {/* CTA */}
-          <div className="col-span-2 flex flex-col justify-end">
+          <div className="col-span-2 flex flex-col justify-end mt-2">
             <button
               onClick={handleSearch}
               className="w-full relative overflow-hidden h-7 rounded-lg bg-primary text-primary-contrast font-bold text-xs shimmer-btn transition-all duration-200 hover:scale-98 hover:opacity-95 active:scale-95 flex items-center justify-center gap-2"
