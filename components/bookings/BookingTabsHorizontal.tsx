@@ -62,7 +62,8 @@ const packageTypes = [
   'Weekend Getaway',
 ];
 
-export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' | 'demo3' | 'demo5' }) {
+export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' | 'demo3' | 'demo5' | 'demo6' }) {
+  const inputHeightClass = variant === 'demo6' ? 'h-[50px] text-base' : 'h-8 text-sm';
   const router = useRouter();
 
   const [mainTab, setMainTab] = useState<'cab' | 'packages' | 'hotels' | 'enquiry'>('cab');
@@ -401,13 +402,13 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="sm:col-span-2 lg:col-span-1">
-                    <CityInput id="package-destination" label="Destination" value={pkgDestination} onChange={setPkgDestination} suggestions={packageDestinations} />
+                    <CityInput id="package-destination" label="Destination" value={pkgDestination} onChange={setPkgDestination} suggestions={packageDestinations} inputClassName={inputHeightClass} />
                   </div>
                   <div className="sm:col-span-1 lg:col-span-1">
-                    <CityInput id="package-type" label="Package Type" value={pkgType} onChange={setPkgType} suggestions={packageTypes} />
+                    <CityInput id="package-type" label="Package Type" value={pkgType} onChange={setPkgType} suggestions={packageTypes} inputClassName={inputHeightClass} />
                   </div>
                   <div className="sm:col-span-1 lg:col-span-1">
-                    <CityInput id="package-duration" label="Duration" value={pkgDuration} onChange={setPkgDuration} suggestions={packageDurations} />
+                    <CityInput id="package-duration" label="Duration" value={pkgDuration} onChange={setPkgDuration} suggestions={packageDurations} inputClassName={inputHeightClass} />
                   </div>
 
                   {/* Passengers & Travel Date (grouped for mobile) */}
@@ -417,7 +418,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       <select
                         value={pkgPassengers}
                         onChange={e => setPkgPassengers(e.target.value)}
-                        className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                        className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                       >
                         {['1', '2', '3', '4', '5', '6', '7', '8', '10', '12', '15+'].map(n => (
                           <option key={n}>{n}</option>
@@ -432,7 +433,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                         min={today}
                         value={date}
                         onChange={e => { setDate(e.target.value); setPkgErrors(p => ({ ...p, date: false })); }}
-                        className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none transition-colors ${pkgErrors.date ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
+                        className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none transition-colors ${pkgErrors.date ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
                           }`}
                       />
                     </div>
@@ -446,7 +447,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       placeholder="Full name"
                       value={pkgName}
                       onChange={e => { setPkgName(e.target.value); setPkgErrors(p => ({ ...p, name: false })); }}
-                      className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none placeholder:text-slate-400 transition-colors ${pkgErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
+                      className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none placeholder:text-slate-400 transition-colors ${pkgErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
                         }`}
                     />
                   </div>
@@ -457,14 +458,14 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       placeholder="10-digit mobile number"
                       value={pkgMobile}
                       onChange={e => { setPkgMobile(e.target.value.replace(/\D/g, '').slice(0, 10)); setPkgErrors(p => ({ ...p, mobile: false })); }}
-                      className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none placeholder:text-slate-400 transition-colors ${pkgErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
+                      className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none placeholder:text-slate-400 transition-colors ${pkgErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'
                         }`}
                     />
                   </div>
                   <div className="sm:col-span-2 lg:col-span-1 flex items-end">
                     <button
                       onClick={handlePackageEnquiry}
-                      className="w-full h-8 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1 text-white shadow-lg shadow-teal-500/30"
+                      className="w-full ${inputHeightClass} rounded-xl font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1 text-white shadow-lg shadow-teal-500/30"
                       style={{ background: 'linear-gradient(135deg, #14b8a6, #06b6d4)', color: '#000' }}
                     >
                       Send Enquiry via WhatsApp
@@ -501,7 +502,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                   {/* Row 1 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4 w-full">
                     <div className="w-full lg:flex-[1.5] min-w-[200px]">
-                      <CityInput id="hotel-dest" label="City or Hotel Name" value={hotelDestination} onChange={setHotelDestination} suggestions={packageDestinations} />
+                      <CityInput id="hotel-dest" label="City or Hotel Name" value={hotelDestination} onChange={setHotelDestination} suggestions={packageDestinations} inputClassName={inputHeightClass} />
                     </div>
                     <div className="w-full lg:flex-1">
                       <label className="block text-[11px] font-semibold text-slate-900 mb-1">Check-in *</label>
@@ -510,7 +511,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                         min={today}
                         value={hotelCheckIn}
                         onChange={e => { setHotelCheckIn(e.target.value); setHotelErrors(p => ({ ...p, checkin: false })); }}
-                        className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none transition-colors ${hotelErrors.checkin ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
+                        className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none transition-colors ${hotelErrors.checkin ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
                       />
                     </div>
                     <div className="w-full lg:flex-1">
@@ -520,7 +521,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                         min={hotelCheckIn || today}
                         value={hotelCheckOut}
                         onChange={e => { setHotelCheckOut(e.target.value); setHotelErrors(p => ({ ...p, checkout: false })); }}
-                        className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none transition-colors ${hotelErrors.checkout ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
+                        className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none transition-colors ${hotelErrors.checkout ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
                       />
                     </div>
                     <div className="w-full lg:flex-1">
@@ -528,7 +529,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       <select
                         value={hotelRooms}
                         onChange={e => setHotelRooms(e.target.value)}
-                        className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                        className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                       >
                         {['1 Room', '2 Rooms', '3 Rooms', '4+ Rooms'].map(n => (
                           <option key={n}>{n}</option>
@@ -540,7 +541,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       <select
                         value={hotelGuests}
                         onChange={e => setHotelGuests(e.target.value)}
-                        className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                        className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                       >
                         {['1 Guest', '2 Guests', '3 Guests', '4 Guests', '5+ Guests'].map(n => (
                           <option key={n}>{n}</option>
@@ -558,7 +559,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                         placeholder="Name"
                         value={pkgName}
                         onChange={e => { setPkgName(e.target.value); setHotelErrors(p => ({ ...p, name: false })); }}
-                        className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none placeholder:text-slate-400 transition-colors ${hotelErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
+                        className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none placeholder:text-slate-400 transition-colors ${hotelErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
                       />
                     </div>
                     <div className="w-full lg:flex-1 lg:max-w-[250px]">
@@ -568,13 +569,13 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                         placeholder="10-digit"
                         value={pkgMobile}
                         onChange={e => { setPkgMobile(e.target.value.replace(/\D/g, '').slice(0, 10)); setHotelErrors(p => ({ ...p, mobile: false })); }}
-                        className={`w-full h-8 rounded-xl border bg-white text-slate-900 px-3 text-sm outline-none placeholder:text-slate-400 transition-colors ${hotelErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
+                        className={`w-full ${inputHeightClass} rounded-xl border bg-white text-slate-900 px-3 outline-none placeholder:text-slate-400 transition-colors ${hotelErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-slate-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
                       />
                     </div>
                     <div className="w-full lg:w-auto shrink-0 flex flex-col justify-end mt-2 ">
                       <button
                         onClick={handleHotelEnquiry}
-                        className="w-full lg:w-[220px] h-8 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1 text-white shadow-lg shadow-teal-500/30"
+                        className="w-full lg:w-[220px] ${inputHeightClass} rounded-xl font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1 text-white shadow-lg shadow-teal-500/30"
                         style={{ background: 'linear-gradient(135deg, #14b8a6, #06b6d4)', color: '#000' }}
                       >
                         Send Enquiry via WhatsApp
@@ -598,28 +599,28 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                   <select
                     value={airportTripType}
                     onChange={e => setAirportTripType(e.target.value as 'drop' | 'pickup')}
-                    className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                    className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                   >
                     <option value="drop">Drop to Airport</option>
                     <option value="pickup">Pickup from Airport</option>
                   </select>
                 </div>
                 <div className="w-full flex-1">
-                  <CityInput id="airport-from" label={airportTripType === 'drop' ? 'Pickup City' : 'Drop City'} value={from} onChange={setFrom} suggestions={fromCities} />
+                  <CityInput id="airport-from" label={airportTripType === 'drop' ? 'Pickup City' : 'Drop City'} value={from} onChange={setFrom} suggestions={fromCities} inputClassName={inputHeightClass} />
                 </div>
                 <div className="w-full flex-1">
-                  <CityInput id="airport-to" label={airportTripType === 'drop' ? 'Drop Airport' : 'Pickup Airport'} value={to} onChange={setTo} suggestions={airportSuggestions} />
+                  <CityInput id="airport-to" label={airportTripType === 'drop' ? 'Drop Airport' : 'Pickup Airport'} value={to} onChange={setTo} suggestions={airportSuggestions} inputClassName={inputHeightClass} />
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-1 gap-4 w-full">
                 <div className="w-full flex-1 min-w-[130px]">
-                  <CityInput id="from" label="From" value={from} onChange={setFrom} suggestions={fromCities} />
+                  <CityInput id="from" label="From" value={from} onChange={setFrom} suggestions={fromCities} inputClassName={inputHeightClass} />
                 </div>
 
                 {!isLocal && (
                   <div className="w-full flex-1 min-w-[130px]">
-                    <CityInput id="to" label="To" value={to} onChange={setTo} suggestions={toCities} />
+                    <CityInput id="to" label="To" value={to} onChange={setTo} suggestions={toCities} inputClassName={inputHeightClass} />
                   </div>
                 )}
               </div>
@@ -634,7 +635,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                   min={today}
                   value={date}
                   onChange={e => setDate(e.target.value)}
-                  className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                  className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                 />
               </div>
 
@@ -644,7 +645,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                   type="time"
                   value={time}
                   onChange={e => setTime(e.target.value)}
-                  className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                  className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                 />
               </div>
 
@@ -657,7 +658,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       min={date || today}
                       value={returnDate}
                       onChange={e => setReturnDate(e.target.value)}
-                      className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                      className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                     />
                   </div>
                   <div className="w-full flex-1">
@@ -666,7 +667,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
                       type="time"
                       value={returnTime}
                       onChange={e => setReturnTime(e.target.value)}
-                      className="w-full h-8 rounded-xl border border-slate-200 bg-white text-slate-900 px-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
+                      className="w-full `${inputHeightClass} rounded-xl border border-slate-200 bg-white text-slate-900 px-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 font-medium"
                     />
                   </div>
                 </>
@@ -677,7 +678,7 @@ export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' |
             <div className="w-full lg:w-auto shrink-0 flex flex-col justify-end mt-2 lg:mt-0 lg:ml-auto">
               <button
                 onClick={handleSearch}
-                className="w-full lg:w-[180px] h-8 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-teal-500/30"
+                className="w-full lg:w-[180px] ${inputHeightClass} rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-teal-500/30"
                 style={{ boxShadow: '0 4px 20px var(--glow)' }}
               >
                 Explore Cabs →

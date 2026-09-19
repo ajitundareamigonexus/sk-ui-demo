@@ -9,6 +9,7 @@ interface CityInputProps {
     value: string;
     onChange: (value: string) => void;
     suggestions: string[];
+    inputClassName?: string;
 }
 
 export default function CityInput({
@@ -17,6 +18,7 @@ export default function CityInput({
     value,
     onChange,
     suggestions,
+    inputClassName = 'h-8 text-xs',
 }: CityInputProps) {
     const [query, setQuery] = useState(value);
     const [open, setOpen] = useState(false);
@@ -59,7 +61,7 @@ export default function CityInput({
 
     return (
         <div ref={ref} className="relative" id={id}>
-            <label className="block text-[10px] font-semibold text-white/60 mb-0.5">
+            <label className="block text-[8px] font-semibold text-white/60 mb-0.5">
                 {label}
             </label>
 
@@ -79,7 +81,7 @@ export default function CityInput({
                         onChange(e.target.value);
                         setOpen(true);
                     }}
-                    className="w-full h-7 rounded-lg border border-border bg-background text-foreground pl-6 pr-2 text-xs outline-none focus:border-primary"
+                    className={`w-full rounded-lg border border-border bg-background text-foreground pl-6 pr-2 outline-none focus:border-primary ${inputClassName}`}
                 />
             </div>
 

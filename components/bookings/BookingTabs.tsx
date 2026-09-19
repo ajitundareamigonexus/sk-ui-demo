@@ -7,6 +7,7 @@ import { saveSearchQuery } from '@/lib/bookingStore';
 import { fromCities, toCities } from '@/data/data';
 import type { TripType } from '@/lib/types';
 import CityInput from '../CityInput';
+import CityInputLight from '../CityInputLight';
 
 const airportSuggestions = [
   'Mumbai Airport (BOM)',
@@ -61,7 +62,9 @@ const packageTypes = [
   'Weekend Getaway',
 ];
 
-export default function BookingTabs() {
+export default function BookingTabs({ variant = 'demo2' }: { variant?: 'demo2' | 'demo3' | 'demo5' | 'demo6' }) {
+  const isDemo6 = variant === 'demo6';
+  const inputHeightClass = isDemo6 ? 'h-[40px] text-sm' : 'h-8 text-xs';
   const router = useRouter();
 
   const [mainTab, setMainTab] = useState<'cab' | 'packages'>('cab');
@@ -216,24 +219,22 @@ export default function BookingTabs() {
   const isAirport = cabTab === 'airport';
   const isLocal = cabTab === 'local';
   const isPackages = mainTab === 'packages';
+  const CityField = isDemo6 ? CityInputLight : CityInput;
 
   return (
     <div
-      className="w-[78%] sm:w-[80%] md:w-[60%] lg:w-[100%] rounded-2xl border border-white/10 bg-black/20 backdrop-blur-full p-2.5 sm:p-2.5 relative text-white"
-      style={{ boxShadow: 'var(--shadow-lg)' }}
+      className={isDemo6 ? "w-[90%] sm:w-[85%] md:w-[70%] lg:w-full max-w-[620px] rounded-[24px] border border-[#D5E4EA] bg-white/95 backdrop-blur-md p-4 sm:p-5 relative text-[#12304A] shadow-[0_20px_60px_-15px_rgba(18,48,74,0.15)] mx-auto" : "w-[78%] sm:w-[80%] md:w-[60%] lg:w-[100%] rounded-2xl border border-white/10 bg-black/20 backdrop-blur-full p-2.5 sm:p-2.5 relative text-white"}
+      style={isDemo6 ? undefined : { boxShadow: 'var(--shadow-lg)' }}
     >
       {/* ── Main Category Switcher (CAB Booking vs Travel Packages) ── */}
-      <div className="grid grid-cols-2 gap-1.5 mb-2.5 p-1 rounded-xl bg-black/30 border border-white/10 backdrop-blur-md">
+      <div className={isDemo6 ? "grid grid-cols-2 gap-2 mb-4 p-1.5 rounded-2xl bg-[#F1F8F8] border border-[#D5E4EA]" : "grid grid-cols-2 gap-1.5 mb-2.5 p-1 rounded-xl bg-black/30 border border-white/10 backdrop-blur-md"}>
         <button
           type="button"
           onClick={() => {
             setMainTab('cab');
             setError('');
           }}
-          className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-extrabold transition-all duration-200 cursor-pointer ${mainTab === 'cab'
-            ? 'bg-primary text-primary-contrast shadow-md'
-            : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
+          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${isDemo6 ? (mainTab === 'cab' ? 'bg-[#0FA89A] text-white shadow-[0_4px_12px_rgba(15,168,154,0.22)]' : 'text-[#12304A] hover:bg-white') : (mainTab === 'cab' ? 'bg-primary text-primary-contrast shadow-md' : 'text-white/70 hover:text-white hover:bg-white/10')}`}
         >
           <Car size={16} />
           <span>CAB Booking</span>
@@ -246,10 +247,7 @@ export default function BookingTabs() {
             setError('');
             setPkgSuccess(false);
           }}
-          className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-extrabold transition-all duration-200 cursor-pointer ${mainTab === 'packages'
-            ? 'bg-teal-500 text-white shadow-md'
-            : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
+          className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${isDemo6 ? (mainTab === 'packages' ? 'bg-[#0FA89A] text-white shadow-[0_4px_12px_rgba(15,168,154,0.22)]' : 'text-[#12304A] hover:bg-white') : (mainTab === 'packages' ? 'bg-teal-500 text-white shadow-md' : 'text-white/70 hover:text-white hover:bg-white/10')}`}
         >
           <Package size={16} />
           <span>Travel Packages</span>
@@ -258,7 +256,7 @@ export default function BookingTabs() {
 
       {/* ── Cab Booking Sub-Tabs (Only visible when CAB Booking is active) ── */}
       {mainTab === 'cab' && (
-        <div className="grid grid-cols-4 gap-0.5 mb-2 p-0.5 rounded-lg bg-card border border-border">
+        <div className={isDemo6 ? "grid grid-cols-4 gap-1 mb-4 p-1 rounded-xl bg-[#F3F8FA] border border-[#D5E4EA]" : "grid grid-cols-4 gap-0.5 mb-2 p-0.5 rounded-lg bg-card border border-border"}>
           {cabTabs.map(({ id, label }) => (
             <button
               key={id}
@@ -267,10 +265,7 @@ export default function BookingTabs() {
                 setCabTab(id);
                 setError('');
               }}
-              className={`flex items-center justify-center py-1.5 rounded-md text-[10px] sm:text-xs font-bold transition-all cursor-pointer ${cabTab === id
-                ? 'bg-primary text-primary-contrast'
-                : 'text-primary hover:bg-background'
-                }`}
+              className={`flex items-center justify-center ${isDemo6 ? 'py-2 rounded-lg' : 'py-1.5 rounded-md'} text-[10px] sm:text-xs font-semibold transition-all cursor-pointer ${isDemo6 ? (cabTab === id ? 'bg-[#0FA89A] text-white shadow-sm' : 'text-[#12304A] hover:bg-white') : (cabTab === id ? 'bg-primary text-primary-contrast' : 'text-primary hover:bg-background')}`}
             >
               {label}
             </button>
@@ -280,38 +275,38 @@ export default function BookingTabs() {
 
       {/* ── Packages Tab Content ── */}
       {isPackages ? (
-        <div className="space-y-1.5 mb-3">
+        <div className={isDemo6 ? "space-y-4 mb-2" : "space-y-1.5 mb-3"}>
           {pkgSuccess ? (
             <div className="flex flex-col items-center justify-center py-6 space-y-3 text-center">
               <div className="w-14 h-14 rounded-full bg-teal-500/20 flex items-center justify-center">
                 <Package size={28} className="text-teal-400" />
               </div>
-              <p className="text-teal-400 font-bold text-sm">Enquiry Sent via WhatsApp!</p>
-              <p className="text-white/60 text-xs max-w-[200px]">
+              <p className={isDemo6 ? "text-[#087F78] font-bold text-sm" : "text-teal-400 font-bold text-sm"}>Enquiry Sent via WhatsApp!</p>
+              <p className={isDemo6 ? "text-[#64748B] text-xs max-w-[240px]" : "text-white/60 text-xs max-w-[200px]"}>
                 Our team will contact you shortly with the best package deals.
               </p>
               <button
                 onClick={() => setPkgSuccess(false)}
-                className="text-xs text-white/60 underline hover:text-white transition-colors"
+                className={isDemo6 ? "text-xs text-[#64748B] underline hover:text-[#0FA89A] transition-colors" : "text-xs text-white/60 underline hover:text-white transition-colors"}
               >
                 Submit another enquiry
               </button>
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 gap-1.5">
-                <div>
-                  <CityInput id="package-destination" label="Destination" value={pkgDestination} onChange={setPkgDestination} suggestions={packageDestinations} />
+              <div className={isDemo6 ? "grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-4" : "grid grid-cols-2 gap-1.5"}>
+                <div className={isDemo6 ? "sm:col-span-2" : ""}>
+                  <CityField id="package-destination" label="Destination" value={pkgDestination} onChange={setPkgDestination} suggestions={packageDestinations} inputClassName={inputHeightClass} />
                 </div>
-                <CityInput id="package-type" label="Package Type" value={pkgType} onChange={setPkgType} suggestions={packageTypes} />
-                <CityInput id="package-duration" label="Duration" value={pkgDuration} onChange={setPkgDuration} suggestions={packageDurations} />
+                <CityField id="package-type" label="Package Type" value={pkgType} onChange={setPkgType} suggestions={packageTypes} inputClassName={inputHeightClass} />
+                <CityField id="package-duration" label="Duration" value={pkgDuration} onChange={setPkgDuration} suggestions={packageDurations} inputClassName={inputHeightClass} />
                 {/* Passengers */}
                 <div>
-                  <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Passengers</label>
+                  <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Passengers</label>
                   <select
                     value={pkgPassengers}
                     onChange={e => setPkgPassengers(e.target.value)}
-                    className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+                    className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
                   >
                     {['1', '2', '3', '4', '5', '6', '7', '8', '10', '12', '15+'].map(n => (
                       <option key={n}>{n}</option>
@@ -320,49 +315,46 @@ export default function BookingTabs() {
                 </div>
                 {/* Travel Date */}
                 <div>
-                  <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Travel Date</label>
+                  <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Travel Date</label>
                   <input
                     type="date"
                     min={today}
                     value={date}
                     onChange={e => { setDate(e.target.value); setPkgErrors(p => ({ ...p, date: false })); }}
-                    className={`w-full h-7 rounded-lg border bg-background text-foreground px-2 text-xs outline-none transition-colors ${pkgErrors.date ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'
-                      }`}
+                    className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border bg-[#F7FBFC] text-[#12304A] px-3 outline-none transition-colors ${pkgErrors.date ? 'border-red-500 ring-2 ring-red-500/10' : 'border-[#D5E4EA] focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10'}` : `w-full ${inputHeightClass} rounded-lg border bg-background text-foreground px-2 outline-none transition-colors ${pkgErrors.date ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'}`}
                   />
                 </div>
 
                 {/* Name */}
                 <div>
-                  <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Your Name *</label>
+                  <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Your Name *</label>
                   <input
                     type="text"
                     placeholder="Full name"
                     value={pkgName}
                     onChange={e => { setPkgName(e.target.value); setPkgErrors(p => ({ ...p, name: false })); }}
-                    className={`w-full h-7 rounded-lg border bg-background text-foreground px-2 text-xs outline-none placeholder:text-muted transition-colors ${pkgErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'
-                      }`}
+                    className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border bg-[#F7FBFC] text-[#12304A] px-3 outline-none placeholder:text-[#94A3B8] transition-colors ${pkgErrors.name ? 'border-red-500 ring-2 ring-red-500/10' : 'border-[#D5E4EA] focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10'}` : `w-full ${inputHeightClass} rounded-lg border bg-background text-foreground px-2 outline-none placeholder:text-muted transition-colors ${pkgErrors.name ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'}`}
                   />
                 </div>
               </div>
 
               {/* Mobile - full width */}
               <div>
-                <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Mobile Number *</label>
+                <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Mobile Number *</label>
                 <input
                   type="tel"
                   placeholder="10-digit mobile number"
                   value={pkgMobile}
                   onChange={e => { setPkgMobile(e.target.value.replace(/\D/g, '').slice(0, 10)); setPkgErrors(p => ({ ...p, mobile: false })); }}
-                  className={`w-full h-7 rounded-lg border bg-background text-foreground px-2 text-xs outline-none placeholder:text-muted transition-colors ${pkgErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'
-                    }`}
+                  className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border bg-[#F7FBFC] text-[#12304A] px-3 outline-none placeholder:text-[#94A3B8] transition-colors ${pkgErrors.mobile ? 'border-red-500 ring-2 ring-red-500/10' : 'border-[#D5E4EA] focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10'}` : `w-full ${inputHeightClass} rounded-lg border bg-background text-foreground px-2 outline-none placeholder:text-muted transition-colors ${pkgErrors.mobile ? 'border-red-500 ring-1 ring-red-500/40' : 'border-border focus:border-primary'}`}
                 />
               </div>
 
               {/* CTA */}
               <button
                 onClick={handlePackageEnquiry}
-                className="w-full h-7 rounded-lg mt-3 font-bold text-xs transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #14b8a6, #06b6d4)', color: '#000' }}
+                className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl mt-2 font-bold text-xs transition-all duration-200 hover:shadow-[0_8px_24px_rgba(15,168,154,0.22)] active:scale-[0.98] flex items-center justify-center gap-2 bg-gradient-to-r from-[#0FA89A] to-[#08B9AA] text-white shadow-[0_6px_18px_rgba(15,168,154,0.2)]` : `w-full ${inputHeightClass} rounded-lg mt-3 font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2`}
+                style={isDemo6 ? undefined : { background: 'linear-gradient(135deg, #14b8a6, #06b6d4)', color: '#000' }}
               >
                 <Package size={13} />
                 Send Enquiry via WhatsApp →
@@ -372,93 +364,93 @@ export default function BookingTabs() {
         </div>
       ) : (
         /* ── Cab Booking Fields ── */
-        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-3 content-start" style={{ minHeight: '170px' }}>
+        <div className={isDemo6 ? "grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-4 mb-2 content-start" : "grid grid-cols-2 gap-1.5 sm:gap-2 mb-3 content-start"} style={isDemo6 ? undefined : { minHeight: '170px' }}>
 
           {isAirport ? (
             <>
-              <div className="lg:col-span-1">
-                <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Trip</label>
+              <div className="sm:col-span-2 lg:col-span-1">
+                <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Trip</label>
                 <select
                   value={airportTripType}
                   onChange={e => setAirportTripType(e.target.value as 'drop' | 'pickup')}
-                  className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+                  className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
                 >
                   <option value="drop">Drop to Airport</option>
                   <option value="pickup">Pickup from Airport</option>
                 </select>
               </div>
               <div className="lg:col-span-1">
-                <CityInput id="airport-from" label={airportTripType === 'drop' ? 'Pickup City' : 'Drop City'} value={from} onChange={setFrom} suggestions={fromCities} />
+                <CityField id="airport-from" label={airportTripType === 'drop' ? 'Pickup City' : 'Drop City'} value={from} onChange={setFrom} suggestions={fromCities} inputClassName={inputHeightClass} />
               </div>
               <div className="lg:col-span-1">
-                <CityInput id="airport-to" label={airportTripType === 'drop' ? 'Drop Airport' : 'Pickup Airport'} value={to} onChange={setTo} suggestions={airportSuggestions} />
+                <CityField id="airport-to" label={airportTripType === 'drop' ? 'Drop Airport' : 'Pickup Airport'} value={to} onChange={setTo} suggestions={airportSuggestions} inputClassName={inputHeightClass} />
               </div>
             </>
           ) : (
             <>
               <div className="lg:col-span-1">
-                <CityInput id="from" label="From" value={from} onChange={setFrom} suggestions={fromCities} />
+                <CityField id="from" label="From" value={from} onChange={setFrom} suggestions={fromCities} inputClassName={inputHeightClass} />
               </div>
 
               {!isLocal && (
                 <div className="lg:col-span-1">
-                  <CityInput id="to" label="To" value={to} onChange={setTo} suggestions={toCities} />
+                  <CityField id="to" label="To" value={to} onChange={setTo} suggestions={toCities} inputClassName={inputHeightClass} />
                 </div>
               )}
             </>
           )}
 
           <div className="lg:col-span-1">
-            <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Pickup Date</label>
+            <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Pickup Date</label>
             <input
               type="date"
               min={today}
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+              className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
             />
           </div>
 
           <div className="lg:col-span-1">
-            <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Pickup Time</label>
+            <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Pickup Time</label>
             <input
               type="time"
               value={time}
               onChange={e => setTime(e.target.value)}
-              className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+              className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
             />
           </div>
 
           {isRound && (
             <>
               <div className="lg:col-span-1">
-                <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Return Date</label>
+                <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Return Date</label>
                 <input
                   type="date"
                   min={date || today}
                   value={returnDate}
                   onChange={e => setReturnDate(e.target.value)}
-                  className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+                  className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
                 />
               </div>
               <div className="lg:col-span-1">
-                <label className="block text-[10px] font-semibold text-white/60 mb-0.5">Return Time</label>
+                <label className={isDemo6 ? "block text-[10px] font-semibold text-[#64748B] mb-1" : "block text-[10px] font-semibold text-white/60 mb-0.5"}>Return Time</label>
                 <input
                   type="time"
                   value={returnTime}
                   onChange={e => setReturnTime(e.target.value)}
-                  className="w-full h-7 rounded-lg border border-border bg-background text-foreground px-2 text-xs outline-none focus:border-primary"
+                  className={isDemo6 ? `w-full ${inputHeightClass} rounded-xl border border-[#D5E4EA] bg-[#F7FBFC] text-[#12304A] px-3 outline-none focus:border-[#0FA89A] focus:ring-2 focus:ring-[#0FA89A]/10` : `w-full ${inputHeightClass} rounded-lg border border-border bg-background text-foreground px-2 outline-none focus:border-primary`}
                 />
               </div>
             </>
           )}
 
           {/* CTA */}
-          <div className="col-span-2 flex flex-col justify-end mt-2">
+          <div className="sm:col-span-2 flex flex-col justify-end mt-2 sm:mt-4">
             <button
               onClick={handleSearch}
-              className="w-full relative overflow-hidden h-7 rounded-lg bg-primary text-primary-contrast font-bold text-xs shimmer-btn transition-all duration-200 hover:scale-98 hover:opacity-95 active:scale-95 flex items-center justify-center gap-2"
-              style={{ boxShadow: '0 4px 20px var(--glow)' }}
+              className={isDemo6 ? `w-full relative overflow-hidden ${inputHeightClass} rounded-xl bg-gradient-to-r from-[#0FA89A] to-[#08B9AA] text-white font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(15,168,154,0.25)] active:scale-[0.98] flex items-center justify-center gap-2` : `w-full relative overflow-hidden ${inputHeightClass} rounded-lg bg-primary text-primary-contrast font-bold text-xs shimmer-btn transition-all duration-200 hover:scale-98 hover:opacity-95 active:scale-95 flex items-center justify-center gap-2`}
+              style={isDemo6 ? undefined : { boxShadow: '0 4px 20px var(--glow)' }}
             >
               Explore Cabs →
             </button>
@@ -467,15 +459,15 @@ export default function BookingTabs() {
       )}
 
       {/* ── Features ── */}
-      <div className="flex justify-center gap-4 mt-1.5 text-[10px] text-white/70 font-medium">
-        <span className="flex items-center gap-1"><div className="w-1 h-1 rounded-full bg-primary"></div> Free Cancellation</span>
-        <span className="flex items-center gap-1"><div className="w-1 h-1 rounded-full bg-primary"></div> 24/7 Support</span>
-        <span className="flex items-center gap-1"><div className="w-1 h-1 rounded-full bg-primary"></div> Best Price</span>
+      <div className={isDemo6 ? "flex flex-wrap justify-center gap-x-4 gap-y-1.5 mt-2 text-[10px] text-[#526B7A] font-medium" : "flex justify-center gap-4 mt-1.5 text-[10px] text-white/70 font-medium"}>
+        <span className="flex items-center gap-1">{isDemo6 ? <span className="text-[#0FA89A] font-bold">✓</span> : <div className="w-1 h-1 rounded-full bg-primary"></div>} Free Cancellation</span>
+        <span className="flex items-center gap-1">{isDemo6 ? <span className="text-[#0FA89A] font-bold">✓</span> : <div className="w-1 h-1 rounded-full bg-primary"></div>} 24/7 Support</span>
+        <span className="flex items-center gap-1">{isDemo6 ? <span className="text-[#0FA89A] font-bold">✓</span> : <div className="w-1 h-1 rounded-full bg-primary"></div>} {isDemo6 ? 'Transparent Pricing' : 'Best Price'}</span>
       </div>
 
       {/* ── Error ── */}
       {error && (
-        <div className="mt-4 flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2">
+        <div className={isDemo6 ? "mt-3 flex items-center gap-2 text-red-600 text-xs bg-red-50 border border-red-200 rounded-xl px-3 py-2" : "mt-4 flex items-center gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2"}>
           <AlertCircle size={16} />
           {error}
         </div>
